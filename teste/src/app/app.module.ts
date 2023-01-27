@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { CriarContaComponent } from './criar-conta/criar-conta.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistrarAcidenteComponent } from './registrar-acidente/registrar-acidente.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CriarContaComponent,
     PerfilComponent,
-    RegistrarAcidenteComponent
+    RegistrarAcidenteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

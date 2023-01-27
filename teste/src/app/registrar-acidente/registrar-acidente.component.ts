@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormularioAcidente } from './formulario-acidente';
 
 @Component({
   selector: 'app-registrar-acidente',
@@ -10,20 +11,13 @@ export class RegistrarAcidenteComponent implements OnInit {
   terceiros: string [] = [
     '',
   ]
-
-  donoVeiculo: string;
-  modelo: string;
-  ano: number;
-  placa: string = '';
-  terceiro = {
-    nome: [''],
-    cpf: ['']
-  }
-  descricaoAcidente: string;
   
+  formularioAcidente: FormularioAcidente;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.formularioAcidente = new FormularioAcidente;
   }
 
   addTerceiro(){
@@ -31,15 +25,16 @@ export class RegistrarAcidenteComponent implements OnInit {
   }
 
   removerTerceiro(){
-    if(this.terceiros.length > 1)
-    this.terceiros.pop();
-    this.terceiro.cpf.pop();
-    this.terceiro.nome.pop();
+    if(this.terceiros.length > 1){
+      this.terceiros.pop();
+      this.formularioAcidente.terceiro.cpf.pop();
+      this.formularioAcidente.terceiro.nome.pop();
+    }
   }
 
   onSubmit(donoVeiculo: string, modelo: string, ano: number, placa: string, nome: string[], cpf: string[], descricaoAcidente: string){
     console.log(donoVeiculo, modelo, ano, placa, nome, cpf, descricaoAcidente);
-    
+    this.formularioAcidente = new FormularioAcidente;
   }
 
 }

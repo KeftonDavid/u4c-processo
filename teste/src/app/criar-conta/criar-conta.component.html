@@ -1,19 +1,36 @@
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="inputGroup-sizing-default">Nome</span>
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
+<h2>Crie já sua conta!</h2> <br>
+<form (ngSubmit)="onSubmit(formularioConta.nome, formularioConta.email, formularioConta.cpf, formularioConta.senha)" action="" method="post">
   
-  <div class="input-group mb-3">
+  <div class="input-group mb-1">
+    <span class="input-group-text" id="inputGroup-sizing-default">Nome</span>
+    <input #nome="ngModel" [(ngModel)]="formularioConta.nome" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="3" maxlength="50">
+  </div>
+  <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="form-text">Seu nome deve ser preenchido corretamente!</div>
+
+  <div class="input-group mt-3 mb-1">
     <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
-    <input placeholder="exemplo@exemplo.com" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    <input #email="ngModel" [(ngModel)]="formularioConta.email" [ngModelOptions]="{standalone: true}" placeholder="exemplo@exemplo.com" type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" autocomplete="email" required email minlength="3" maxlength="50">
   </div>
+  <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-text">E-mail incorreto!</div>
 
-  <div class="input-group mb-3">
+  <div class="input-group mt-3 mb-1">
     <span class="input-group-text" id="inputGroup-sizing-default">CPF</span>
-    <input placeholder="XXX . XXX . XXX - XX" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    <input #cpf="ngModel" [(ngModel)]="formularioConta.cpf" [ngModelOptions]="{standalone: true}" placeholder="XXX . XXX . XXX - XX" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="11" maxlength="11">
   </div>
-
-  <div class="input-group mb-3">
+  <div *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)" class="form-text">Seu CPF deve ser preenchido corretamente!</div>
+  
+  <div class="input-group mt-3 mb-1">
     <span class="input-group-text" id="inputGroup-sizing-default">Senha</span>
-    <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    <input #senha="ngModel" [(ngModel)]="formularioConta.senha" [ngModelOptions]="{standalone: true}" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="8" maxlength="50">
   </div>
+  <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="form-text">Sua senha deve possuir no mínimo 8 caracteres!</div>
+  
+  <div class="input-group mt-3 mb-1">
+    <span class="input-group-text" id="inputGroup-sizing-default">Confirmar senha</span>
+    <input #confirmarSenha="ngModel" [(ngModel)]="formularioConta.confirmarSenha" [ngModelOptions]="{standalone: true}" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="8" maxlength="50">
+  </div>
+  <div *ngIf="confirmarSenha.invalid && (confirmarSenha.dirty || confirmarSenha.touched)" class="form-text">Suas senhas devem ser equivalentes!</div>
+  
+  <br>
+  <button [disabled]="nome.invalid || email.invalid || cpf.invalid || senha.invalid || confirmarSenha.invalid || confirmarSenha.value != senha.value " type="submit" class="btn btn-success">Criar Conta</button>
+</form>
