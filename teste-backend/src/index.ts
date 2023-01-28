@@ -1,13 +1,20 @@
 
 import Hapi from '@hapi/hapi';
 import { AppDataSource } from "./data-source";
+import cors from 'cors';
 
 
 AppDataSource.initialize().then(() => {
     const init = async () => {
         const server = Hapi.server({
             port: process.env.PORT,
-            host: 'localhost'
+            host: 'localhost',
+            routes: {
+                cors: {
+                    origin: ['*']
+
+                }
+            }
         })
     
         
@@ -15,7 +22,10 @@ AppDataSource.initialize().then(() => {
             method: 'POST',
             path:'/registroacidente',
             handler: (request, h) => {
-                return h.response('Registro de acidente');
+                console.log(request.payload);
+                
+                return 'sucesso'
+                
             }
         });
 
@@ -23,7 +33,7 @@ AppDataSource.initialize().then(() => {
             method: 'GET',
             path:'/registroacidente',
             handler: (request, h) => {
-                
+              return  
             }
         });
 

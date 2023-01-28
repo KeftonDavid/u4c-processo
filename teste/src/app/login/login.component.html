@@ -3,14 +3,14 @@
   
   <div class="input-group mt-3 mb-1">
     <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
-    <input #email="ngModel" [(ngModel)]="login.email" [ngModelOptions]="{standalone: true}" placeholder="exemplo@exemplo.com" type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" autocomplete="email" required email minlength="3" maxlength="50">
+    <input id="email" name="email" #email="ngModel" [(ngModel)]="login.email" [ngModelOptions]="{standalone: true}" placeholder="exemplo@exemplo.com" type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" autocomplete="email" required email minlength="3" maxlength="50">
   </div>
   <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-text">E-mail incorreto!</div>
 
   
   <div class="input-group mt-3 mb-1">
     <span class="input-group-text" id="inputGroup-sizing-default">Senha</span>
-    <input #senha="ngModel" [(ngModel)]="login.senha" [ngModelOptions]="{standalone: true}" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="8" maxlength="50">
+    <input id="senha" name="senha" #senha="ngModel" [(ngModel)]="login.senha" [ngModelOptions]="{standalone: true}" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required minlength="8" maxlength="50">
   </div>
   <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="form-text">Sua senha deve possuir no mínimo 8 caracteres!</div>
     

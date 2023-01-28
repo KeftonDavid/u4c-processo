@@ -1,33 +1,33 @@
 <h2>Registro de acidente</h2> <br>
 
-<form (ngSubmit)="onSubmit(formularioAcidente.donoVeiculo, formularioAcidente.modelo, formularioAcidente.ano, formularioAcidente.placa, formularioAcidente.terceiro.nome, formularioAcidente.terceiro.cpf, formularioAcidente.descricaoAcidente)" action="" method="post">
+<form (ngSubmit)="onSubmit(formularioAcidente.donoVeiculo, formularioAcidente.modelo, formularioAcidente.ano, formularioAcidente.placa, formularioAcidente.terceiro.nome, formularioAcidente.terceiro.cpf, formularioAcidente.descricaoAcidente)" action="http://localhost:3000/registroacidente" method="post">
     
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Nome do dono do veículo</span>
-        <input [(ngModel)]="formularioAcidente.donoVeiculo" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input id="donoVeiculo" name="donoVeiculo" [(ngModel)]="formularioAcidente.donoVeiculo" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
     
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Modelo do veículo</span>
-        <input [(ngModel)]="formularioAcidente.modelo" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input id="modelo" name="modelo" [(ngModel)]="formularioAcidente.modelo" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
     
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Ano do veículo</span>
-        <input [(ngModel)]="formularioAcidente.ano" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input id="ano" name="ano" [(ngModel)]="formularioAcidente.ano" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
     
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Placa do veículo</span>
-        <input [(ngModel)]="formularioAcidente.placa" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input id="placa" name="placa" [(ngModel)]="formularioAcidente.placa" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
 
     <div *ngFor="let item of terceiros; let i = index">
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Nome do terceiro envolvido no acidente</span>
-            <input [(ngModel)]="formularioAcidente.terceiro.nome[i]" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <input id="nome" name="nome" [(ngModel)]="formularioAcidente.terceiro.nome[i]" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             <span class="input-group-text" id="inputGroup-sizing-default">CPF do terceiro</span>
-            <input [(ngModel)]="formularioAcidente.terceiro.cpf[i]" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <input id="cpf" name="cpf" [(ngModel)]="formularioAcidente.terceiro.cpf[i]" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             <button (click)="addTerceiro()" type="button" class="btn btn-secondary">Adicionar terceiros</button>
             <button *ngIf ="terceiros.length > 1"(click)="removerTerceiro()" type="button" class="btn btn-danger">Remover terceiros</button>
         </div>    
