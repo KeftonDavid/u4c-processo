@@ -1,18 +1,18 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { RegistroAcidente } from "./RegistroAcidente";
 
 @Entity('registroacidentes')
 export class Terceiro{
 
-    @PrimaryColumn({ type:"text" })
-    id: string;
+    @PrimaryGeneratedColumn('uuid')
+    id: number;
 
-    @Column({ type: "text" })
-    nome: string;
+    @Column("text", { array: true })
+    nome: string[];
 
-    @Column({ type: "text" })
-    cpf: string;
+    @Column("text", { array: true })
+    cpf: string[];
 
-    @ManyToOne(() => RegistroAcidente, registroacidente => registroacidente.terceiro)
+    @ManyToMany(() => RegistroAcidente, registroacidente => registroacidente.terceiro)
     registroacidente: RegistroAcidente
 }

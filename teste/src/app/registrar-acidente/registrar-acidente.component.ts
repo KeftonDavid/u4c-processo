@@ -29,8 +29,8 @@ export class RegistrarAcidenteComponent implements OnInit {
   removerTerceiro(){
     if(this.terceiros.length > 1){
       this.terceiros.pop();
-      this.formularioAcidente.terceiro.cpf.pop();
-      this.formularioAcidente.terceiro.nome.pop();
+      this.formularioAcidente.cpf.pop();
+      this.formularioAcidente.nome.pop();
     }
   }
 

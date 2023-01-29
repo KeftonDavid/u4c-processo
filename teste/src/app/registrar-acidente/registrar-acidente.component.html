@@ -1,6 +1,6 @@
 <h2>Registro de acidente</h2> <br>
 
-<form (ngSubmit)="onSubmit(formularioAcidente.donoVeiculo, formularioAcidente.modelo, formularioAcidente.ano, formularioAcidente.placa, formularioAcidente.terceiro.nome, formularioAcidente.terceiro.cpf, formularioAcidente.descricaoAcidente)" action="http://localhost:3000/registroacidente" method="post">
+<form (ngSubmit)="onSubmit(formularioAcidente.donoVeiculo, formularioAcidente.modelo, formularioAcidente.ano, formularioAcidente.placa, formularioAcidente.nome, formularioAcidente.cpf, formularioAcidente.descricaoAcidente)" action="http://localhost:3000/registroacidente" method="post">
     
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Nome do dono do veículo</span>
@@ -25,9 +25,9 @@
     <div *ngFor="let item of terceiros; let i = index">
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Nome do terceiro envolvido no acidente</span>
-            <input id="nome" name="nome" [(ngModel)]="formularioAcidente.terceiro.nome[i]" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <input id="nome" name="nome" [(ngModel)]="formularioAcidente.nome[i]" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             <span class="input-group-text" id="inputGroup-sizing-default">CPF do terceiro</span>
-            <input id="cpf" name="cpf" [(ngModel)]="formularioAcidente.terceiro.cpf[i]" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <input id="cpf" name="cpf" [(ngModel)]="formularioAcidente.cpf[i]" [ngModelOptions]="{standalone: true}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             <button (click)="addTerceiro()" type="button" class="btn btn-secondary">Adicionar terceiros</button>
             <button *ngIf ="terceiros.length > 1"(click)="removerTerceiro()" type="button" class="btn btn-danger">Remover terceiros</button>
         </div>    

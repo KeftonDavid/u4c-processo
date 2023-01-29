@@ -4,11 +4,9 @@ export class FormularioAcidente {
     donoVeiculo: string;
     modelo: string;
     ano: number;
-    placa: string = '';
-    terceiro = {
-      nome: [''],
-      cpf: ['']
-    }
+    placa: string;
+    nome: string[] = [];
+    cpf: string[] = []
     descricaoAcidente: string;
     
 }
