@@ -57,16 +57,16 @@ AppDataSource.initialize().then(() => {
             }
         });
 
-        server.route({
+        server.route({                                                                                              //rota de criação de conta de usuário, chamada no componente angular de registro de conta
             method: 'POST',
             path:'/registrousuario',
             handler: async (request, h) => {
 
-                const hashSenha = await bcrypt.hash((request.payload as any).senha, 10);
+                const hashSenha = await bcrypt.hash((request.payload as any).senha, 10);                            //criptografia de senha
                 const registrousuarioRepository = AppDataSource.getRepository(Usuario);
 
                 
-                const usuarioexiste = await registrousuarioRepository.exist({
+                const usuarioexiste = await registrousuarioRepository.exist({                                       //verificando se usuário existe
                     where: { 
                         email: (request.payload as any).email,
                         cpf: (request.payload as any).cpf
@@ -74,23 +74,56 @@ AppDataSource.initialize().then(() => {
                 })
                 
                 
-                if(usuarioexiste == true){
+                if(usuarioexiste == true){                                                                           //se usuário já existe, não é possível cadastrar-se
                     return 'usuário já existe!';
                 }
-                else{
-                    const newregistrousuario = registrousuarioRepository.create({
+                else{                                                                                                //se não existe, é realizado o cadastro
+                    const newregistrousuario = registrousuarioRepository.create({                                    //recebendo corpo de requisição e atribuindo a tabela de usuário
                         nome: (request.payload as any).nome,
                         email: (request.payload as any).email,
                         cpf: (request.payload as any).cpf,
                         senha: hashSenha
                     }) 
                     
-                    await registrousuarioRepository.save(newregistrousuario);
+                    await registrousuarioRepository.save(newregistrousuario);                                        //criação de perfil de usuário
                     return 'Perfil criado com sucesso!';
     
                 }
                 
 
+            }
+        });
+
+        server.route({                                                                                                  //rota de login, chamada no componente angular de login
+            method: 'POST',
+            path:'/login',
+            handler: async (request, h) => {
+                
+                const loginRepository = AppDataSource.getRepository(Usuario);
+                
+                const senhaexiste = await loginRepository.findOne({                                                     //verificando se senha existe, fazendo busca no banco onde o e-mail seja igual ao da requisição
+                    select:{
+                        senha: true
+                    },
+                    where: {
+                        email: (request.payload as any).email
+                    }
+                })
+                
+                const hashSenha = await bcrypt.compare((request.payload as any).senha, (senhaexiste?.senha as string));  //comparando senha criptografada do banco com a senha proveniente da requisição
+                const usuarioexiste = await loginRepository.exist({                                                      //verificando se o e-mail existe
+                    where: {
+                        email: (request.payload as any).email,
+                    }
+                })
+                
+
+                if(usuarioexiste == true && hashSenha == true){                                                          //se o e-mail existe e as duas senhas criptografadas são equivalentes, fazer login
+                    return 'usuario existe, login feito';
+                }
+                else{                                                                                                    // se o e-mail não existe e/ou as senhas não correspondem, as credenciais estão inválidas.
+                    return 'credenciais inválidas';
+                }
             }
         });
 
@@ -111,15 +144,6 @@ AppDataSource.initialize().then(() => {
         });
 
         server.route({
-            method: 'POST',
-            path:'/login',
-            handler: (request, h) => {
-                
-                
-            }
-        });
-
-        server.route({
             method: 'PUT',
             path:'/perfil/{id}',
             handler: (request, h) => {
@@ -128,7 +152,7 @@ AppDataSource.initialize().then(() => {
         });
 
         await server.start();
-        console.log("Servidor funcionando: ", server.info.port);
+        console.log("Servidor funcionando na porta ", server.info.port);
     };
     
         process.on('unhandledRejection', (err) => {
