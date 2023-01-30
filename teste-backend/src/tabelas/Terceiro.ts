@@ -7,11 +7,11 @@ export class Terceiro{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column("text", { array: true })
-    nome: string[];
+    @Column("text")
+    nome: string;
 
-    @Column("text", { array: true })
-    cpf: string[];
+    @Column({type: "text", unique: true})
+    cpf: string;
 
     @ManyToMany(() => RegistroAcidente, registroacidente => registroacidente.terceiro)
     registroacidente: RegistroAcidente

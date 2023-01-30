@@ -26,26 +26,18 @@ export class RegistrarAcidenteComponent implements OnInit {
     this.terceiros.push('');
   }
 
-  removerTerceiro(){
-    if(this.terceiros.length > 1){
-      this.terceiros.pop();
-      this.formularioAcidente.cpf.pop();
-      this.formularioAcidente.nome.pop();
-    }
+  registrarAcidente(donoVeiculo: string, modelo: string, ano: number, placa: string, descricaoAcidente: string, url: string){
+    return this.http.post(url, { donoVeiculo, modelo, ano, placa, descricaoAcidente}, {responseType: 'text'} );
   }
 
-  registrarAcidente(donoVeiculo: string, modelo: string, ano: number, placa: string, nome: string[], cpf: string[], descricaoAcidente: string, url: string){
-    return this.http.post(url, { donoVeiculo, modelo, ano, placa, nome, cpf, descricaoAcidente}, {responseType: 'text'} );
-  }
-
-  onSubmit(donoVeiculo: string, modelo: string, ano: number, placa: string, nome: string[], cpf: string[], descricaoAcidente: string){
-    this.registrarAcidente(donoVeiculo, modelo, ano, placa, nome, cpf, descricaoAcidente, 'http://localhost:3000/registroacidente')
+  onSubmit(donoVeiculo: string, modelo: string, ano: number, placa: string, descricaoAcidente: string){
+    this.registrarAcidente(donoVeiculo, modelo, ano, placa, descricaoAcidente, 'http://localhost:3000/registroacidente')
     .subscribe(res => {
       console.log(res);
       return res;
     })
     
-    console.log(donoVeiculo, modelo, ano, placa, nome, cpf, descricaoAcidente);
+    console.log(donoVeiculo, modelo, ano, placa, descricaoAcidente);
     this.formularioAcidente = new FormularioAcidente;
   }
 

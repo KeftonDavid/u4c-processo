@@ -42,17 +42,6 @@ AppDataSource.initialize().then(() => {
 
                 await registroacidenteRepository.save(newregistroacidente);
 
-                const terceiroRepository = AppDataSource.getRepository(Terceiro);
-                const newterceiro = terceiroRepository.create({
-                    nome: (request.payload as any).nome,
-                    cpf: (request.payload as any).cpf
-                })
-
-                console.log(newterceiro);
-                
-
-                await terceiroRepository.save(newterceiro);
-
                 return "registro de acidente feito com sucesso";
             }
         });
@@ -167,6 +156,20 @@ AppDataSource.initialize().then(() => {
               })
             return perfil;
             
+            }
+        });
+
+
+        server.route({                                                                                              //rota de criação de conta de usuário, chamada no componente angular de registro de conta
+            method: 'GET',
+            path:'/acidentes',
+            handler: (request, h) => {
+                const acidentesRepository = AppDataSource.getRepository(Usuario);
+                const acidentes = acidentesRepository.find();
+                console.log(acidentes);
+                
+                return acidentes;
+
             }
         });
 

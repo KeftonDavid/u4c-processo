@@ -8,6 +8,7 @@ export class AuthService {
 
   public usuarioEmail: any = null;
   public usuarioPerfil: any = null;
+  public acidentes: any = null;
   constructor(
     private http: HttpClient
   ) { }
@@ -49,6 +50,19 @@ export class AuthService {
         console.log(res);
         this.usuarioEmail = null;
         return this.usuarioEmail;
+      }
+    )
+  }
+
+  registroAcidentes(url: string){
+    return this.http.get(url)
+  }
+
+  retornarRegistroAcidentes(){
+    this.registroAcidentes('http://localhost:3000/acidentes').subscribe(
+      res => {
+        this.acidentes = res;
+        return this.acidentes;
       }
     )
   }

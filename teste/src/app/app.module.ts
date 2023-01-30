@@ -11,6 +11,7 @@ import { CriarContaComponent } from './criar-conta/criar-conta.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistrarAcidenteComponent } from './registrar-acidente/registrar-acidente.component';
 import { LoginComponent } from './login/login.component';
+import { ExibirAcidentesComponent } from './exibir-acidentes/exibir-acidentes.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginComponent } from './login/login.component';
     CriarContaComponent,
     PerfilComponent,
     RegistrarAcidenteComponent,
-    LoginComponent
+    LoginComponent,
+    ExibirAcidentesComponent
   ],
   imports: [
     BrowserModule,
