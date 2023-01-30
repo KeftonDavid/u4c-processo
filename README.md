@@ -20,7 +20,7 @@ Teste prático do processo seletivo da empresa u4c, que consiste no desenvolvime
 - Jest
 
 
-# Componentes da aplicação
+# Componentes da aplicação (frontend desenvolvido utilizando Angular V14)
 - Criar Conta
 - Exibir Acidentes
 - Login
