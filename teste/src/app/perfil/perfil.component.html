@@ -1,12 +1,14 @@
 <div class="card border-dark mb-3" style="max-width: 18rem;">
     <div class="card-header bg-dark text-light">Perfil do usuário</div>
     <div class="card-body">
-        <h4 class="card-title">Nome Completo</h4>
-        <h6 class="card-title">CPF: XXX . XXX . XXX - XX</h6>
-      <p class="card-text"> E-mail: email@email.com</p>
+        <h4 class="card-title">Nome: {{ auth.usuarioPerfil.nome }}</h4>
+        <h6 class="card-title">CPF: {{ auth.usuarioPerfil.cpf }}</h6>
+      <p class="card-text"> E-mail: {{ auth.usuarioPerfil.email }}</p>
     </div>
 </div>
 
-<a>
-  <button class="btn btn-danger">Logout</button>
-</a>
+<form (ngSubmit)="onSubmit()" action="http://localhost:3000/perfil/logout" method="get">
+  <a>
+    <button type="submit" class="btn btn-danger">Logout</button>
+  </a>
+</form>

@@ -6,7 +6,7 @@ import { RegistroAcidente } from './tabelas/RegistroAcidente';
 import { Terceiro } from './tabelas/Terceiro';
 import { Usuario } from './tabelas/Usuario';
 import  bcrypt  from 'bcrypt';
-
+import * as cookie from '@hapi/cookie';
 
 AppDataSource.initialize().then(() => {
     const init = async () => {
@@ -20,7 +20,7 @@ AppDataSource.initialize().then(() => {
                 }
             }
         })
-    
+
         
         server.route({
             method: 'POST',
@@ -94,9 +94,21 @@ AppDataSource.initialize().then(() => {
             }
         });
 
+        await server.register(require('@hapi/cookie'));
+        server.auth.strategy('session', 'cookie', {
+            cookie: {
+                name: 'testecookie',
+                password: 'azsxdcfvgbhnjmazsxdcfvgbhnjmazsx',
+                isSecure: false
+            }
+        })
+
         server.route({                                                                                                  //rota de login, chamada no componente angular de login
             method: 'POST',
             path:'/login',
+            options: {
+                auth: false
+            },
             handler: async (request, h) => {
                 
                 const loginRepository = AppDataSource.getRepository(Usuario);
@@ -117,37 +129,52 @@ AppDataSource.initialize().then(() => {
                     }
                 })
                 
+                const emailUsuario = await loginRepository.findOne({
+                    select: {
+                        email: true
+                    },
+                    where: {
+                        email: ((request.payload as any).email)
+                    }
+                })
 
-                if(usuarioexiste == true && hashSenha == true){                                                          //se o e-mail existe e as duas senhas criptografadas são equivalentes, fazer login
-                    return 'usuario existe, login feito';
+                if(usuarioexiste == true && hashSenha == true){    
+                                                                                                                        //se o e-mail existe e as duas senhas criptografadas são equivalentes, fazer login
+                    request.cookieAuth.set({email: (request.payload as any).email})
+                    return h.response((request.payload as any).email)
                 }
                 else{                                                                                                    // se o e-mail não existe e/ou as senhas não correspondem, as credenciais estão inválidas.
-                    return 'credenciais inválidas';
+                    return h.response(undefined);
                 }
             }
         });
 
         server.route({
             method: 'GET',
-            path:'/registroacidente',
+            path:'/perfil',
             handler: (request, h) => {
-              return  
+              const usuarioRepository = AppDataSource.getRepository(Usuario);
+              const perfil = usuarioRepository.findOne({
+                select: {
+                    email: true,
+                    cpf: true,
+                    nome: true,
+                    senha: true
+                },
+                where: {
+                    email: request.state.email
+                }
+              })
+            return perfil;
+            
             }
         });
 
         server.route({
             method: 'GET',
-            path:'/registrousuario',
+            path:'/perfil/logout',
             handler: (request, h) => {
-                
-            }
-        });
-
-        server.route({
-            method: 'PUT',
-            path:'/perfil/{id}',
-            handler: (request, h) => {
-                
+                return h.response().unstate('email');
             }
         });
 

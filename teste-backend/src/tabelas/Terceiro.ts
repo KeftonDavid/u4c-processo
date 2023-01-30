@@ -1,10 +1,10 @@
 import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { RegistroAcidente } from "./RegistroAcidente";
 
-@Entity('registroacidentes')
+@Entity('terceiros')
 export class Terceiro{
 
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column("text", { array: true })

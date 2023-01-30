@@ -4,7 +4,7 @@ import { Terceiro } from "./Terceiro";
 @Entity('registroacidentes')
 export class RegistroAcidente{
 
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({ type:"text" })
@@ -25,5 +25,4 @@ export class RegistroAcidente{
     @ManyToMany(() => Terceiro, terceiro => terceiro.id)
     @JoinColumn({ name: 'terceiro_id' })
     terceiro: Terceiro;
-
 }

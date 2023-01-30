@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
-  constructor() { }
+  usuario: any;
+
+  constructor(
+    private http: HttpClient,
+    public auth: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.auth.retornarDadosUsuario();
+  }
+
+
+  onSubmit(){
+    this.auth.retornarEncerrarSessao()
+    this.router.navigate(["/login"]);
   }
 
 }
