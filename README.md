@@ -18,3 +18,12 @@ Teste prático do processo seletivo da empresa u4c, que consiste no desenvolvime
 - TypeORM
 - PostgreSQL
 - Jest
+
+
+# Componentes da aplicação
+- Criar Conta
+- Exibir Acidentes
+- Login
+- Perfil
+- Registrar Acidente
+
