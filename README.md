@@ -26,6 +26,3 @@ Teste prático do processo seletivo da empresa u4c, que consiste no desenvolvime
 - Login
 - Perfil
 - Registrar Acidente
-
-## Estado atual
-A aplicação ainda não pode ser executada em outras máquinas, visto que utilizei um banco de dados postgresql local, porém, futuramente prepararei um readme com instruções de instalação,
